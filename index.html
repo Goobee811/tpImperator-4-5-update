@@ -1,0 +1,1537 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Imperator 50EC | Syngenta PPM Việt Nam</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --green: #009639; /* Syngenta green */
+        --olive: #6b8018; /* tab underline */
+        --blue-card: #4f94d4; /* Product info background */
+        --gray-100: #f8f8f8;
+        --gray-300: #e0e0e0;
+        --text-dark: #222;
+        --text-light: #666;
+        --radius: 4px;
+        --max-width: 1200px;
+      }
+
+      *,
+      *:before,
+      *:after {
+        box-sizing: border-box;
+        padding: 0;
+        margin: 0;
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        color: var(--text-dark);
+        background: #fff;
+        line-height: 1.6;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      /* ───────── TOP STRIP ───────── */
+      .top-strip {
+        background: #000;
+        color: #fff;
+        font-size: 0.75rem;
+        display: flex;
+        justify-content: space-between;
+        gap: 1rem;
+        padding: 0.35rem 0.75rem;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1000;
+      }
+
+      .top-strip nav {
+        display: flex;
+        gap: 1.25rem;
+      }
+
+      /* ───────── MAIN HEADER ───────── */
+      header {
+        background: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.75rem 1rem;
+        border-bottom: 1px solid var(--gray-300);
+        position: fixed;
+        top: 22px;
+        width: 100%;
+        z-index: 999;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .brand img {
+        height: 32px;
+      }
+
+      /* ───────── PRIMARY NAV ───────── */
+      .primary-nav {
+        display: flex;
+        gap: 1.5rem;
+        font-size: 0.9rem;
+      }
+
+      .primary-nav a {
+        padding: 0.25rem 0;
+        position: relative;
+      }
+
+      .primary-nav a:hover:after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: -4px;
+        height: 2px;
+        background: var(--green);
+      }
+
+      /* ───────── BREADCRUMB ───────── */
+      .breadcrumb {
+        font-size: 0.8rem;
+        margin: 110px auto 0;
+        max-width: var(--max-width);
+        padding: 0 1rem;
+        color: var(--text-light);
+      }
+
+      .breadcrumb span {
+        margin-right: 0.25rem;
+      }
+
+      /* ───────── PRODUCT HERO CARD ───────── */
+      .hero-card {
+        max-width: var(--max-width);
+        margin: 1.5rem auto;
+        padding: 0 1rem;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+      }
+
+      .hero-card .logo-box {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 2px solid var(--blue-card);
+        border-radius: var(--radius);
+        min-height: 280px;
+        background: #fff;
+        position: relative;
+      }
+
+      .hero-card .logo-box img {
+        max-width: 260px;
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+      }
+
+      .thumbnail-nav {
+        position: absolute;
+        bottom: 10px;
+        display: flex;
+        gap: 8px;
+        justify-content: center;
+      }
+
+      .thumbnail {
+        width: 40px;
+        height: 40px;
+        border: 1px solid var(--gray-300);
+        border-radius: 4px;
+        cursor: pointer;
+        opacity: 0.7;
+        transition: all 0.2s;
+      }
+
+      .thumbnail:hover,
+      .thumbnail.active {
+        opacity: 1;
+        border-color: var(--green);
+      }
+
+      .hero-card .info-box {
+        background: var(--blue-card);
+        color: #fff;
+        border-radius: var(--radius);
+        padding: 1.5rem;
+      }
+
+      .info-box h1 {
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .status {
+        display: inline-block;
+        background: #009fe3;
+        color: #fff;
+        font-size: 0.7rem;
+        padding: 0.15rem 0.5rem;
+        border-radius: 4px;
+        text-transform: uppercase;
+        margin-bottom: 1rem;
+      }
+
+      .info-table {
+        font-size: 0.9rem;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        row-gap: 0.75rem;
+      }
+
+      .info-table span {
+        display: block;
+      }
+
+      /* ───────── TAB BAR ───────── */
+      .tabs {
+        background: #fff;
+        position: sticky;
+        top: 70px;
+        border-bottom: 1px solid var(--gray-300);
+        z-index: 998;
+        transition: box-shadow 0.3s ease;
+      }
+
+      .tabs.scrolled {
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .tabs nav {
+        max-width: var(--max-width);
+        margin: 0 auto;
+        display: flex;
+        gap: 2rem;
+        overflow-x: auto;
+        padding: 0 1rem;
+        scrollbar-width: thin;
+        -ms-overflow-style: none; /* IE and Edge */
+        scrollbar-width: none; /* Firefox */
+      }
+
+      .tabs nav::-webkit-scrollbar {
+        height: 4px;
+        display: none; /* Chrome, Safari */
+      }
+
+      .tabs nav::-webkit-scrollbar-thumb {
+        background-color: var(--gray-300);
+        border-radius: 4px;
+      }
+
+      .tabs button {
+        background: none;
+        border: none;
+        padding: 0.9rem 0;
+        font-weight: 600;
+        cursor: pointer;
+        font-size: 1rem;
+        white-space: nowrap;
+        border-bottom: 3px solid transparent;
+        transition: all 0.2s ease;
+      }
+
+      .tabs button.active,
+      .tabs button:focus {
+        border-color: var(--olive);
+        color: var(--olive);
+      }
+
+      /* ───────── CONTENT SECTIONS ───────── */
+      .section {
+        max-width: var(--max-width);
+        margin: 2rem auto;
+        padding: 0 1rem;
+        display: none;
+        animation: fade 0.4s forwards;
+      }
+
+      .section.active {
+        display: block;
+      }
+
+      /* Đảm bảo vị trí section không bị che khi cuộn */
+      .section-anchor {
+        display: block;
+        position: relative;
+        top: -100px; /* Đảm bảo đủ khoảng cách để không bị thanh tabs che */
+        visibility: hidden;
+        pointer-events: none;
+      }
+
+      h2.section-title {
+        font-size: 1.75rem;
+        margin-bottom: 1.5rem;
+        position: relative;
+      }
+
+      h2.section-title:after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -4px;
+        width: 48px;
+        height: 2px;
+        background: var(--olive);
+      }
+
+      .subsection-title {
+        font-size: 1.25rem;
+        margin: 1.5rem 0 0.75rem;
+        color: var(--olive);
+      }
+
+      .bullet {
+        margin-left: 1.5rem;
+        margin-bottom: 1rem;
+        list-style: disc;
+      }
+
+      .bullet li {
+        margin-bottom: 0.5rem;
+      }
+
+      .highlight {
+        font-weight: bold;
+        color: var(--olive);
+      }
+
+      .advantage {
+        color: var(--olive);
+        font-weight: 500;
+      }
+
+      /* ───────── DOWNLOAD BOX ───────── */
+      .download-box {
+        background: var(--blue-card);
+        border-radius: var(--radius);
+        color: #fff;
+        padding: 1.5rem;
+        margin-top: 1.5rem;
+      }
+
+      .download-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+      }
+
+      .download-item:last-child {
+        border-bottom: none;
+      }
+
+      .download-item a {
+        color: #fff;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      /* ───────── DATA TABLE ───────── */
+      .data-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 1rem 0 2rem;
+      }
+
+      .data-table th {
+        background: var(--gray-100);
+        text-align: left;
+        padding: 0.75rem 1rem;
+        font-weight: 600;
+        border: 1px solid var(--gray-300);
+      }
+
+      .data-table td {
+        padding: 0.75rem 1rem;
+        border: 1px solid var(--gray-300);
+      }
+
+      .data-table tr:nth-child(even) td {
+        background: var(--gray-100);
+      }
+
+      /* ───────── FEATURE CARDS ───────── */
+      .feature-cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 1.5rem;
+        margin: 2rem 0;
+      }
+
+      .feature-card {
+        border: 1px solid var(--gray-300);
+        border-radius: var(--radius);
+        padding: 1.5rem;
+        background: var(--gray-100);
+        height: 100%;
+      }
+
+      .feature-card h4 {
+        font-size: 1.1rem;
+        margin-bottom: 1rem;
+        color: var(--olive);
+      }
+
+      .feature-card p {
+        margin-bottom: 0.75rem;
+      }
+
+      .feature-card p:last-child {
+        margin-bottom: 0;
+      }
+
+      /* ───────── USER GROUP ───────── */
+      .user-group {
+        margin-bottom: 2.5rem;
+      }
+
+      .user-group h3 {
+        font-size: 1.3rem;
+        margin-bottom: 0.75rem;
+      }
+
+      .user-group-description {
+        font-style: italic;
+        margin-bottom: 1rem;
+      }
+
+      .benefits-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 1.25rem;
+        margin-top: 1rem;
+      }
+
+      .benefit-card {
+        border: 1px solid var(--gray-300);
+        border-radius: var(--radius);
+        padding: 1.25rem;
+        height: 100%;
+      }
+
+      .benefit-card h4 {
+        margin-bottom: 0.75rem;
+        color: var(--olive);
+      }
+
+      /* ───────── PROCESS STEPS ───────── */
+      .process {
+        margin-bottom: 2.5rem;
+      }
+
+      .process-name {
+        font-size: 1.2rem;
+        margin-bottom: 1rem;
+        font-weight: 600;
+      }
+
+      .steps {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        margin: 1.5rem 0;
+      }
+
+      .step {
+        display: flex;
+        gap: 1rem;
+      }
+
+      .step-number {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 30px;
+        height: 30px;
+        background: var(--olive);
+        color: white;
+        border-radius: 50%;
+        flex-shrink: 0;
+      }
+
+      .step-content {
+        flex-grow: 1;
+      }
+
+      .step-title {
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+      }
+
+      /* ───────── ENVIRONMENTS ───────── */
+      .environments-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 1.25rem;
+        margin: 1.5rem 0;
+      }
+
+      .environment-card {
+        border: 1px solid var(--gray-300);
+        border-radius: var(--radius);
+        padding: 1.25rem;
+        background: var(--gray-100);
+        height: 100%;
+      }
+
+      .environment-card h4 {
+        margin-bottom: 0.75rem;
+        color: var(--olive);
+      }
+
+      /* ───────── FAQ ───────── */
+      .faq-item {
+        margin-bottom: 1.5rem;
+        border-bottom: 1px solid var(--gray-300);
+        padding-bottom: 1.5rem;
+      }
+
+      .faq-item:last-child {
+        border-bottom: none;
+      }
+
+      .faq-question {
+        font-weight: 600;
+        margin-bottom: 0.75rem;
+        font-size: 1.1rem;
+      }
+
+      /* ───────── EVIDENCE ───────── */
+      .research-item {
+        margin-bottom: 1.5rem;
+        padding-bottom: 1.5rem;
+        border-bottom: 1px solid var(--gray-300);
+      }
+
+      .research-item:last-child {
+        border-bottom: none;
+      }
+
+      .research-name {
+        font-weight: 600;
+        margin-bottom: 0.75rem;
+      }
+
+      /* ───────── SUPPORT ───────── */
+      .contact-info {
+        margin: 1.5rem 0;
+      }
+
+      .contact-item {
+        display: flex;
+        gap: 0.75rem;
+        margin-bottom: 1rem;
+      }
+
+      .contact-icon {
+        width: 24px;
+        text-align: center;
+      }
+
+      /* ───────── REFERENCES ───────── */
+      .references-list {
+        margin-top: 1rem;
+      }
+
+      .reference-item {
+        margin-bottom: 0.75rem;
+        padding-bottom: 0.75rem;
+        border-bottom: 1px solid var(--gray-300);
+      }
+
+      .reference-header {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        cursor: pointer;
+      }
+
+      .reference-toggle {
+        font-size: 1.5rem;
+        width: 20px;
+      }
+
+      .reference-content {
+        padding-left: 30px;
+        margin-top: 0.75rem;
+        display: none;
+      }
+
+      .reference-content.active {
+        display: block;
+      }
+
+      /* ───────── RELATED PRODUCTS ───────── */
+      .related {
+        max-width: var(--max-width);
+        margin: 3rem auto;
+        padding: 0 1rem;
+      }
+
+      .card-row {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+        gap: 1.5rem;
+        margin-top: 1.5rem;
+      }
+
+      .product-card {
+        border: 1px solid var(--gray-300);
+        border-radius: var(--radius);
+        overflow: hidden;
+        transition: all 0.3s ease;
+      }
+
+      .product-card:hover {
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        transform: translateY(-3px);
+      }
+
+      .product-card-image {
+        height: 160px;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: var(--gray-100);
+        border-bottom: 1px solid var(--gray-300);
+      }
+
+      .product-card-image img {
+        max-width: 80%;
+        max-height: 80%;
+        object-fit: contain;
+      }
+
+      .product-card-content {
+        padding: 1rem;
+      }
+
+      .product-card-category {
+        display: inline-block;
+        font-size: 0.75rem;
+        color: var(--text-light);
+        margin-bottom: 0.25rem;
+      }
+
+      .product-card-title {
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+      }
+
+      .product-card-specs {
+        font-size: 0.85rem;
+        color: var(--text-light);
+        margin-bottom: 0.75rem;
+      }
+
+      .product-card-link {
+        display: inline-flex;
+        align-items: center;
+        color: var(--olive);
+        font-weight: 600;
+        font-size: 0.9rem;
+        gap: 0.25rem;
+      }
+
+      /* ───────── FOOTER ───────── */
+      footer {
+        background: #111;
+        color: #fff;
+        margin-top: 3rem;
+      }
+
+      .footer-inner {
+        max-width: var(--max-width);
+        margin: 0 auto;
+        padding: 3rem 1rem 2rem;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 2rem;
+      }
+
+      .footer-col h3 {
+        font-size: 1.1rem;
+        margin-bottom: 1.25rem;
+        font-weight: 600;
+        position: relative;
+      }
+
+      .footer-col h3:after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -8px;
+        width: 40px;
+        height: 2px;
+        background: var(--blue-card);
+      }
+
+      .footer-col ul {
+        list-style: none;
+      }
+
+      .footer-col ul li {
+        margin-bottom: 0.75rem;
+      }
+
+      .footer-contact {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-bottom: 0.75rem;
+      }
+
+      .social-links {
+        display: flex;
+        gap: 1rem;
+        margin-top: 1rem;
+      }
+
+      .social-icon {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background: #333;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+      }
+
+      .social-icon:hover {
+        background: var(--green);
+      }
+
+      .copyright {
+        text-align: center;
+        padding: 1.5rem;
+        background: #000;
+        font-size: 0.8rem;
+        color: rgba(255, 255, 255, 0.7);
+      }
+
+      .footer-links {
+        display: flex;
+        justify-content: center;
+        gap: 1.5rem;
+        margin-top: 0.75rem;
+      }
+
+      /* ───────── ANIMATIONS ───────── */
+      @keyframes fade {
+        from {
+          opacity: 0;
+          transform: translateY(14px);
+        }
+        to {
+          opacity: 1;
+          transform: none;
+        }
+      }
+
+      /* ───────── RESPONSIVE ───────── */
+      @media (max-width: 768px) {
+        .hero-card {
+          grid-template-columns: 1fr;
+        }
+
+        .info-table {
+          grid-template-columns: 1fr;
+        }
+
+        .tabs nav {
+          gap: 1rem;
+        }
+
+        .footer-inner {
+          grid-template-columns: 1fr;
+        }
+
+        .feature-cards,
+        .benefits-grid,
+        .environments-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Top utility strip -->
+    <div class="top-strip">
+      <span>GIỚI THIỆU</span>
+      <nav>
+        <a href="#">TÌM KIẾM</a>
+        <a href="#">SYNGENTA TOÀN CẦU</a>
+        <a href="#">ĐĂNG NHẬP</a>
+        <a href="#">VI ▾</a>
+      </nav>
+    </div>
+
+    <!-- Main header -->
+    <header>
+      <div class="brand">
+        <img src="https://i.imgur.com/dsdO1gC.png" alt="PPM logo" />
+        <img src="https://i.imgur.com/XaqXJws.png" alt="Syngenta Việt Nam" />
+      </div>
+      <nav class="primary-nav">
+        <a href="#">Trang Chủ</a>
+        <a href="#">Sản Phẩm</a>
+        <a href="#">Kinh Doanh</a>
+        <a href="#">Giải Pháp</a>
+        <a href="#">Tin Tức & Bài Viết</a>
+        <a href="#">Video</a>
+      </nav>
+    </header>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+      <span>TRANG CHỦ / SẢN PHẨM / THUỐC DIỆT CÔN TRÙNG /</span>
+      <strong>Imperator 50EC</strong>
+    </div>
+
+    <!-- Product hero card -->
+    <section class="hero-card">
+      <div class="logo-box">
+        <img
+          src="https://placehold.co/400x150/e2e8f0/9ca3af?text=Imperator+50EC"
+          alt="Imperator 50EC"
+          loading="lazy"
+          decoding="async"
+        />
+        <div class="thumbnail-nav">
+          <div class="thumbnail active"></div>
+          <div class="thumbnail"></div>
+          <div class="thumbnail"></div>
+        </div>
+      </div>
+      <div class="info-box">
+        <h1>IMPERATOR 50EC</h1>
+        <span class="status">Đang bán</span>
+        <div class="info-table">
+          <span><strong>Cập nhật:</strong> 10/05/2025</span>
+          <span><strong>Quy cách:</strong> Chai 100ml, Chai 1 lít</span>
+          <span><strong>Số đăng ký:</strong><br />VNDP-HC-503-11-19</span>
+          <span><strong>Nhóm hóa chất:</strong> Pyrethroid</span>
+          <span><strong>Thành phần:</strong><br />Permethrin 50% w/v</span>
+          <span><strong>Công thức:</strong> Dạng nhũ dầu (EC)</span>
+          <span
+            ><strong>Nhóm tác động:</strong> IRAC 3A - Chất điều hòa kênh
+            natri</span
+          >
+          <span
+            ><strong>Cơ chế tác động:</strong> Tác động lên thần kinh côn
+            trùng</span
+          >
+        </div>
+        <p style="margin-top: 1rem; font-size: 0.75rem">
+          Huyền thoại tiên phong kiểm soát muỗi
+        </p>
+      </div>
+    </section>
+
+    <!-- Tabs -->
+    <div class="tabs" id="tabNav">
+      <nav>
+        <button class="tab-link active" data-target="overview">
+          Tổng Quan
+        </button>
+        <button class="tab-link" data-target="application">Ứng Dụng</button>
+        <button class="tab-link" data-target="documents">Tài Liệu</button>
+      </nav>
+    </div>
+
+    <!-- TAB 1: TỔNG QUAN -->
+    <section id="overview" class="section active">
+      <span class="section-anchor" id="anchor-overview"></span>
+      <div id="technology">
+        <h2 class="section-title">Công Nghệ Độc Đáo</h2>
+        <p>
+          <strong>Imperator 50EC</strong> mang lại
+          <span class="highlight">hiệu quả diệt muỗi tức thì và kéo dài</span>.
+          Sản phẩm chứa 50% Permethrin w/v - hoạt chất huyền thoại trong lịch sử
+          kiểm soát muỗi, ra đời năm 1973 tại Rothamsted Experimental Station.
+          Từ Imperial Chemical Industries (ICI) đến Zeneca và nay là Syngenta,
+          di sản này được tiếp nối qua cơ chế tác động kép: gây tê liệt tức thì
+          và tiêu diệt hoàn toàn, đạt hiệu quả 90-95% chỉ trong 24 giờ.
+        </p>
+        <blockquote
+          style="
+            margin: 1.5rem 0;
+            padding: 1rem;
+            border-left: 4px solid var(--olive);
+            background: var(--gray-100);
+          "
+        >
+          <p style="font-style: italic">
+            Permethrin đi vào lịch sử như pyrethroid quang ổn định đầu tiên,
+            khởi đầu cuộc cách mạng toàn cầu trong kiểm soát côn trùng.
+          </p>
+        </blockquote>
+      </div>
+
+      <div id="workflow">
+        <h2 class="section-title">Cách Thức Hoạt Động</h2>
+        <div class="steps">
+          <div class="step">
+            <div class="step-number">1</div>
+            <div class="step-content">
+              <div class="step-title">Tiếp xúc và hấp thụ nhanh chóng</div>
+              <p>
+                Khi muỗi tiếp xúc với bề mặt đã xử lý hoặc đám sương phun,
+                Permethrin nhanh chóng thâm nhập qua biểu bì nhờ cấu trúc
+                lipophilic, thậm chí xuyên qua lớp vảy bảo vệ.
+              </p>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-number">2</div>
+            <div class="step-content">
+              <div class="step-title">Tác động trực tiếp đến hệ thần kinh</div>
+              <p>
+                Permethrin gắn vào các kênh natri trong màng tế bào thần kinh,
+                kéo dài thời gian mở kênh và gây xung động thần kinh lặp đi lặp
+                lại dẫn đến kích thích quá mức.
+              </p>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-number">3</div>
+            <div class="step-content">
+              <div class="step-title">Hiệu ứng hạ gục nhanh chóng</div>
+              <p>
+                Trong vòng 10-30 giây sau tiếp xúc, muỗi biểu hiện co giật không
+                kiểm soát, mất khả năng bay và bị hạ gục, ngăn chặn ngay khả
+                năng đốt và truyền bệnh.
+              </p>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-number">4</div>
+            <div class="step-content">
+              <div class="step-title">Tác dụng diệt côn trùng triệt để</div>
+              <p>
+                Gián đoạn thần kinh kéo dài dẫn đến tử vong trong vòng 24 giờ.
+                Trên bề mặt đã xử lý, hiệu quả dư lượng kéo dài đến 10 ngày tùy
+                điều kiện môi trường.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <p>
+          Imperator 50EC mang lại nhiều ưu điểm vượt trội cho công tác kiểm soát
+          muỗi.
+          <span class="advantage">Tác động nhanh trong 10-30 giây</span>,
+          <span class="advantage">hiệu quả cao lên đến 95%</span>, và
+          <span class="advantage">dư lượng kéo dài đến 10 ngày</span>.
+        </p>
+      </div>
+
+      <div id="features">
+        <h2 class="section-title">Đặc Tính Nổi Bật</h2>
+        <div class="feature-cards">
+          <div class="feature-card">
+            <h4>Di sản và chất lượng đã được chứng minh</h4>
+            <p>
+              <strong>Thông số kỹ thuật:</strong> Hơn 50 năm nghiên cứu và phát
+              triển, quy trình sản xuất hiện đại từ Syngenta và Tagros
+              Chemicals, đáp ứng tiêu chuẩn WHO và EU.
+            </p>
+            <p>
+              <strong>Lợi ích cho người dùng:</strong> Sự tự tin khi sử dụng sản
+              phẩm từ thương hiệu lâu đời với uy tín toàn cầu, đảm bảo chất
+              lượng nhất quán.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <h4>Hiệu quả diệt muỗi vượt trội</h4>
+            <p>
+              <strong>Thông số kỹ thuật:</strong> Tỷ lệ tử vong 90-95% với muỗi
+              trưởng thành trong 24 giờ, bao gồm vector gây bệnh Aedes aegypti
+              (sốt xuất huyết, Zika), Anopheles (sốt rét) và Culex (viêm não
+              Nhật Bản).
+            </p>
+            <p>
+              <strong>Lợi ích cho người dùng:</strong> Kiểm soát hiệu quả các
+              vector bệnh nguy hiểm, giảm thiểu nguy cơ bùng phát dịch.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <h4>Công thức đa năng và linh hoạt</h4>
+            <p>
+              <strong>Thông số kỹ thuật:</strong> Tương thích với nhiều phương
+              pháp - phun bề mặt (10 ngày bảo vệ), phun ULV và phun mù nóng
+              ngoài trời (hiệu quả 90-95%).
+            </p>
+            <p>
+              <strong>Lợi ích cho người dùng:</strong> Phù hợp cho nhiều môi
+              trường và tình huống, từ phòng ngừa đến ứng phó dịch bệnh.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 2: ỨNG DỤNG -->
+    <section id="application" class="section">
+      <span class="section-anchor" id="anchor-application"></span>
+
+      <div id="instructions">
+        <h2 class="section-title">Hướng Dẫn Sử Dụng</h2>
+
+        <div class="process">
+          <div class="process-name">Phun bề mặt tiêu chuẩn</div>
+
+          <div class="steps">
+            <div class="step">
+              <div class="step-number">1</div>
+              <div class="step-content">
+                <div class="step-title">Chuẩn bị dung dịch phun</div>
+                <p>
+                  Pha loãng 20ml Imperator 50EC với 1 lít nước sạch trong bình
+                  phun có áp suất. Trộn đều và sử dụng trong ngày. Đảm bảo mặc
+                  đầy đủ thiết bị bảo hộ cá nhân trước khi pha chế.
+                </p>
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="step-number">2</div>
+              <div class="step-content">
+                <div class="step-title">Thực hiện phun</div>
+                <p>
+                  Điều chỉnh vòi phun sang chế độ phun quạt phẳng, phun đều lên
+                  bề mặt ở khoảng cách 45cm. Tập trung vào khu vực muỗi thường
+                  đậu như tường, rèm cửa, dưới bàn ghế.
+                </p>
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="step-number">3</div>
+              <div class="step-content">
+                <div class="step-title">Liều lượng và phủ đều</div>
+                <p>
+                  Phun với tỷ lệ 1 lít dung dịch cho 25m² diện tích. Đảm bảo phủ
+                  đều nhưng không để chảy nhỏ giọt. Cho phép thời gian khô tự
+                  nhiên và không sử dụng khu vực trong 2 giờ sau khi phun.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="process">
+          <div class="process-name">Phun ULV trong nhà</div>
+
+          <div class="steps">
+            <div class="step">
+              <div class="step-number">1</div>
+              <div class="step-content">
+                <div class="step-title">Chuẩn bị dung dịch và thiết bị</div>
+                <p>
+                  Pha loãng 100ml Imperator 50EC với 900ml dầu mang thích hợp.
+                  Hiệu chỉnh máy phun ULV với tốc độ dòng khoảng 2,28 oz/phút.
+                  Kiểm tra thiết bị hoạt động tốt trước khi bắt đầu.
+                </p>
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="step-number">2</div>
+              <div class="step-content">
+                <div class="step-title">Chuẩn bị không gian xử lý</div>
+                <p>
+                  Đóng cửa sổ và cửa ra vào, tắt hệ thống thông gió. Bắt đầu từ
+                  điểm xa nhất và lùi dần về phía cửa. Đảm bảo khu vực đã được
+                  sơ tán người và vật nuôi.
+                </p>
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="step-number">3</div>
+              <div class="step-content">
+                <div class="step-title">
+                  Thực hiện phun và thời gian cách ly
+                </div>
+                <p>
+                  Di chuyển máy phun theo hình số 8 để phân phối đồng đều. Giữ
+                  không gian đóng kín ít nhất 4 giờ trước khi thông gió. Sau khi
+                  thông gió đầy đủ 30 phút, có thể sử dụng lại khu vực.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin: 2rem 0; text-align: center">
+          <img
+            src="https://placehold.co/800x400/e2e8f0/9ca3af?text=Minh+họa+ứng+dụng+Imperator+50EC"
+            alt="Hình ảnh minh họa hướng dẫn"
+            style="max-width: 100%; border-radius: var(--radius)"
+          />
+        </div>
+      </div>
+
+      <div id="environments">
+        <h2 class="section-title">Môi Trường Sử Dụng</h2>
+        <p>
+          Imperator 50EC được thiết kế để thích ứng với nhiều môi trường khác
+          nhau, từ khu vực đông người đến không gian công nghiệp, cả trong nhà
+          và ngoài trời. Hiệu quả kiểm soát muỗi duy trì trong nhiều điều kiện
+          khí hậu.
+        </p>
+
+        <div class="environments-grid">
+          <div class="environment-card">
+            <h4>Khu vực lưu trú và dịch vụ</h4>
+            <p>
+              Khách sạn, resort, nhà hàng cần kiểm soát muỗi kín đáo để bảo vệ
+              uy tín. Phương pháp phun bề mặt và ULV, ít mùi, không ảnh hưởng
+              trải nghiệm khách. Đặc biệt hiệu quả ở khu vực ngoài trời như hồ
+              bơi, khu vườn.
+            </p>
+          </div>
+
+          <div class="environment-card">
+            <h4>Cơ sở y tế và trường học</h4>
+            <p>
+              Bệnh viện, phòng khám, trường học yêu cầu môi trường an toàn. Phun
+              bề mặt tồn lưu cho hiệu quả kéo dài, giảm tần suất xử lý. Công
+              thức ít mùi giúp giảm thiểu thời gian cách ly và gián đoạn hoạt
+              động.
+            </p>
+          </div>
+
+          <div class="environment-card">
+            <h4>Khu công nghiệp và nhà máy</h4>
+            <p>
+              Nhà máy thực phẩm, dược phẩm cần kiểm soát muỗi, vector trong
+              không gian rộng. Sử dụng phun bề mặt và ULV đạt tiêu chuẩn vệ sinh
+              cao. Tạo môi trường làm việc an toàn và phòng ngừa dịch bệnh hiệu
+              quả.
+            </p>
+          </div>
+
+          <div class="environment-card">
+            <h4>Khu vực công cộng ngoài trời</h4>
+            <p>
+              Công viên, khu dân cư áp dụng phun mù nhiệt kiểm soát nhanh mùa
+              cao điểm muỗi. Duy trì hiệu quả trong điều kiện nhiệt đới ẩm.
+              Phòng ngừa bùng phát dịch bệnh, bảo vệ sức khỏe cộng đồng.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div id="faq">
+        <h2 class="section-title">Câu Hỏi Thường Gặp</h2>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            Imperator 50EC có hiệu quả đối với muỗi kháng thuốc không?
+          </div>
+          <div class="faq-answer">
+            <p>
+              Mặc dù có báo cáo về kháng Permethrin ở một số quần thể muỗi,
+              Imperator 50EC vẫn duy trì hiệu quả với nhiều loài. Để khắc phục
+              vấn đề kháng, nên kết hợp với chất hiệp đồng như PBO hoặc luân
+              phiên với các hoạt chất khác nhóm trong chương trình IPM. Nghiên
+              cứu phòng thí nghiệm cho thấy ngay cả với quần thể kháng thuốc vừa
+              phải, hiệu quả vẫn đạt trên 85% khi kết hợp với PBO.
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            Sau bao lâu tôi có thể cho người vào khu vực đã xử lý?
+          </div>
+          <div class="faq-answer">
+            <p>
+              Thời gian tái nhập: Phun bề mặt (2 giờ hoặc sau khi bề mặt khô),
+              phun ULV (2 giờ sau thông gió), phun mù nhiệt (3 giờ với thông gió
+              kỹ). Với môi trường nhạy cảm như bệnh viện hoặc trường học, nên xử
+              lý vào cuối tuần hoặc thời điểm ít người để đảm bảo thông gió đầy
+              đủ trước khi sử dụng lại. Luôn đảm bảo thông gió kỹ trước khi cho
+              phép người vào lại khu vực.
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            Imperator 50EC có tác động gì đến ong và sinh vật có ích không?
+          </div>
+          <div class="faq-answer">
+            <p>
+              Permethrin có thể độc với ong, cá và một số sinh vật không phải
+              mục tiêu. Khi sử dụng ngoài trời, tránh phun trực tiếp vào hoa
+              đang nở, nguồn nước và khu vực nuôi ong. Tuân thủ thời gian phun
+              phù hợp (tốt nhất là sáng sớm hoặc chiều muộn khi ong ít hoạt
+              động) và tạo vùng đệm an toàn. Không phun trực tiếp vào ao hồ và
+              kênh rạch. Luôn tuân thủ hướng dẫn trên nhãn và quy định địa
+              phương về bảo vệ môi trường.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 3: TÀI LIỆU -->
+    <section id="documents" class="section">
+      <span class="section-anchor" id="anchor-documents"></span>
+
+      <div id="quality">
+        <h2 class="section-title">Cam Kết Chất Lượng</h2>
+
+        <h3 class="subsection-title">🏆 Thương Hiệu Toàn Cầu</h3>
+        <p>
+          Kế thừa di sản 50 năm từ sự phát minh thành công hoạt chất Permethrin
+          năm 1973, qua ICI, Zeneca đến
+          <strong>Syngenta</strong> - IMPERATOR 50EC là biểu tượng của sự đổi
+          mới liên tục. Hợp tác sản xuất với <strong>Tagros Chemicals</strong> -
+          nhà sản xuất pyrethroid hàng đầu và là công ty Ấn Độ duy nhất được EU
+          cấp phép cho Permethrin.
+        </p>
+
+        <h3 class="subsection-title">✅ Tiêu Chuẩn Quốc Tế</h3>
+        <ul class="bullet">
+          <li>
+            <strong>WHO Recommended</strong> - Khuyến cáo trong chương trình
+            kiểm soát véc-tơ
+          </li>
+          <li>
+            <strong>EPA Approved</strong> - Chấp thuận cho ứng dụng y tế công
+            cộng
+          </li>
+          <li>
+            <strong>Tiêu chuẩn Syngenta toàn cầu</strong> - Sản xuất theo quy
+            trình chất lượng quốc tế
+          </li>
+        </ul>
+
+        <h3 class="subsection-title">🛡️ Đăng Ký Hợp Pháp Tại Việt Nam</h3>
+        <ul class="bullet">
+          <li>
+            <strong>Giấy chứng nhận:</strong> Từ Cục Quản lý Môi trường Y tế, Bộ
+            Y tế Việt Nam
+          </li>
+          <li>
+            <strong>Mục đích sử dụng:</strong> Kiểm soát muỗi trong y tế công
+            cộng
+          </li>
+          <li>
+            <strong>Kiểm tra:</strong> Mỗi lô sản xuất được kiểm nghiệm nghiêm
+            ngặt
+          </li>
+        </ul>
+
+        <h3 class="subsection-title">📎 Tài Liệu Đính Kèm</h3>
+        <div class="download-box">
+          <div class="download-item">
+            <span>Giấy chứng nhận đăng ký của Bộ Y tế Việt Nam.pdf</span>
+            <a href="#" target="_blank">(1.2MB) ⭳</a>
+          </div>
+          <div class="download-item">
+            <span>Hướng dẫn sử dụng chi tiết Imperator 50EC.pdf</span>
+            <a href="#" target="_blank">(3.5MB) ⭳</a>
+          </div>
+          <div class="download-item">
+            <span>Phiếu an toàn hóa chất (MSDS) Imperator 50EC.pdf</span>
+            <a href="#" target="_blank">(2.8MB) ⭳</a>
+          </div>
+        </div>
+      </div>
+
+      <div id="purchase">
+        <h2 class="section-title">Thông Tin Mua Hàng</h2>
+        <p>
+          Imperator 50EC được phân phối bởi Syngenta Việt Nam và mạng lưới đối
+          tác ủy quyền với hai quy cách: chai 100ml cho hộ gia đình và quy mô xử
+          lý nhỏ, và chai 1 lít cho PCO chuyên nghiệp và dự án lớn.
+        </p>
+        <p>
+          Để mua hàng chính hãng, vui lòng liên hệ các đại lý ủy quyền phân phối
+          thiết bị và hóa chất PCO trên toàn quốc. Syngenta sẵn sàng đồng hành
+          cung cấp tư vấn kỹ thuật và đào tạo từ kinh nghiệm toàn cầu.
+        </p>
+      </div>
+
+      <div id="support">
+        <h2 class="section-title">Thông Tin Hỗ Trợ</h2>
+        <p>Để được tư vấn chi tiết về Imperator 50EC, vui lòng liên hệ:</p>
+
+        <div class="contact-info">
+          <div class="contact-item">
+            <div class="contact-icon">✉️</div>
+            <div>lienhe.syngenta@syngenta.com</div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon">📞</div>
+            <div>+84 28 37756200</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Related products -->
+    <section class="related">
+      <h2 class="section-title">Sản Phẩm Liên Quan</h2>
+
+      <div class="card-row">
+        <div class="product-card">
+          <div class="product-card-image">
+            <img
+              src="https://placehold.co/300x200/e2e8f0/9ca3af?text=Imperator+50EC"
+              alt="Imperator 50EC"
+            />
+          </div>
+          <div class="product-card-content">
+            <span class="product-card-category">THUỐC DIỆT CÔN TRÙNG</span>
+            <h3 class="product-card-title">Icon 10CS</h3>
+            <div class="product-card-specs">
+              Lambda-Cyhalothrin 10%<br />
+              Vi nang huyền phù (CS)
+            </div>
+            <a href="#" class="product-card-link">Xem thêm →</a>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-card-image">
+            <img
+              src="https://placehold.co/300x200/e2e8f0/9ca3af?text=Klerat+0.005"
+              alt="Klerat 0.005 pellet"
+            />
+          </div>
+          <div class="product-card-content">
+            <span class="product-card-category">THUỐC DIỆT CHUỘT</span>
+            <h3 class="product-card-title">Klerat 0.005 pellet</h3>
+            <div class="product-card-specs">
+              Brodifacoum 0.005%<br />
+              Dạng viên
+            </div>
+            <a href="#" class="product-card-link">Xem thêm →</a>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-card-image">
+            <img
+              src="https://placehold.co/300x200/e2e8f0/9ca3af?text=Altriset+200SC"
+              alt="Altriset 200SC"
+            />
+          </div>
+          <div class="product-card-content">
+            <span class="product-card-category">THUỐC DIỆT MỐI</span>
+            <h3 class="product-card-title">Altriset 200SC</h3>
+            <div class="product-card-specs">
+              Chlorantraniliprole 20%<br />
+              Huyền phù đậm đặc (SC)
+            </div>
+            <a href="#" class="product-card-link">Xem thêm →</a>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-card-image">
+            <img
+              src="https://placehold.co/300x200/e2e8f0/9ca3af?text=Arilon"
+              alt="Arilon Insecticide"
+            />
+          </div>
+          <div class="product-card-content">
+            <span class="product-card-category">THUỐC DIỆT CÔN TRÙNG</span>
+            <h3 class="product-card-title">Arilon Insecticide</h3>
+            <div class="product-card-specs">
+              Indoxacarb 20%<br />
+              Dạng hạt phân tán trong nước
+            </div>
+            <a href="#" class="product-card-link">Xem thêm →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="footer-inner">
+        <div class="footer-col">
+          <h3>Liên Hệ</h3>
+          <div class="footer-contact">
+            <span>📞</span>
+            <span>+84 28 37756200</span>
+          </div>
+          <div class="footer-contact">
+            <span>🏢</span>
+            <span>+84 28 37756298/99</span>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h3>Liên Kết Nhanh</h3>
+          <ul>
+            <li><a href="#">Sản Phẩm</a></li>
+            <li><a href="#">Giải Pháp Cây Trồng</a></li>
+            <li><a href="#">Về Chúng Tôi</a></li>
+            <li><a href="#">Tin Tức & Bài Viết</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h3>Tài Nguyên</h3>
+          <ul>
+            <li><a href="#">Tài Liệu Sản Phẩm</a></li>
+            <li><a href="#">Nhãn An Toàn</a></li>
+            <li><a href="#">Hướng Dẫn Ứng Dụng</a></li>
+            <li><a href="#">Nhà Phân Phối</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h3>Mạng Xã Hội</h3>
+          <div class="social-links">
+            <a href="#" class="social-icon">𝕏</a>
+            <a href="#" class="social-icon">f</a>
+            <a href="#" class="social-icon">▶</a>
+          </div>
+          <address
+            style="margin-top: 1rem; font-style: normal; font-size: 0.9rem"
+          >
+            Syngenta Việt Nam<br />
+            16F – Pearl Plaza, 561A Điện Biên Phủ,<br />
+            Phường 25, Quận Bình Thạnh, Tp.HCM
+          </address>
+        </div>
+      </div>
+
+      <div class="copyright">
+        © <span id="year"></span> Syngenta. Bảo lưu mọi quyền.
+        <div class="footer-links">
+          <a href="#">Chính Sách Bảo Mật</a>
+          <a href="#">Điều Khoản Sử Dụng</a>
+          <a href="#">iSyn</a>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Set current year in footer
+      document.getElementById("year").textContent = new Date().getFullYear();
+
+      // Tab switching (event delegation) - Cải tiến để cuộn tới vị trí cụ thể
+      document.querySelector("#tabNav nav").addEventListener("click", (e) => {
+        const btn = e.target.closest(".tab-link");
+        if (!btn) return;
+
+        // Đánh dấu tab đang active
+        document
+          .querySelectorAll(".tab-link")
+          .forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+
+        // Hiển thị section tương ứng
+        document
+          .querySelectorAll(".section")
+          .forEach((s) => s.classList.remove("active"));
+        document.getElementById(btn.dataset.target).classList.add("active");
+
+        // Cuộn đến section-anchor tương ứng
+        const anchor = document.getElementById(`anchor-${btn.dataset.target}`);
+        if (anchor) {
+          // Sử dụng setTimeout để đảm bảo section đã được hiển thị trước khi cuộn
+          setTimeout(() => {
+            const tabsHeight = document.querySelector(".tabs").offsetHeight;
+            const anchorPosition =
+              anchor.getBoundingClientRect().top + window.pageYOffset;
+            // Trừ đi chiều cao của thanh tabs + khoảng trống bổ sung (20px)
+            window.scrollTo({
+              top: anchorPosition - tabsHeight - 20,
+              behavior: "smooth",
+            });
+          }, 10);
+        }
+      });
+
+      // Xử lý hiệu ứng bóng cho thanh tabs khi cuộn
+      window.addEventListener("scroll", () => {
+        const tabs = document.querySelector(".tabs");
+        const scrollPosition = window.scrollY;
+
+        // Thêm bóng cho tabs khi đã cuộn xuống
+        if (scrollPosition > 100) {
+          tabs.classList.add("scrolled");
+        } else {
+          tabs.classList.remove("scrolled");
+        }
+      });
+
+      // Thumbnail switching
+      document.querySelectorAll(".thumbnail").forEach((thumb, index) => {
+        thumb.addEventListener("click", () => {
+          document
+            .querySelectorAll(".thumbnail")
+            .forEach((t) => t.classList.remove("active"));
+          thumb.classList.add("active");
+          // Here you would switch the main image if you had multiple product images
+          console.log(`Switched to image ${index + 1}`);
+        });
+      });
+
+      // References toggle
+      document.querySelectorAll(".reference-header").forEach((header) => {
+        header.addEventListener("click", () => {
+          const refId = header.getAttribute("data-ref");
+          const content = document.getElementById(`ref-${refId}`);
+          const toggle = header.querySelector(".reference-toggle");
+
+          if (content.classList.contains("active")) {
+            content.classList.remove("active");
+            toggle.textContent = "+";
+          } else {
+            content.classList.add("active");
+            toggle.textContent = "-";
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
